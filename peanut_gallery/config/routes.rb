@@ -1,56 +1,48 @@
 Rails.application.routes.draw do
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+# get "/posts/:id" => "posts#show"
 
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+get "/" => "posts#index"
 
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
+get "/login" => "writers#login_form"
+post "/login" => "writers#login"
+delete "/logout" => "writers#logout"
 
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
+get "/register" => "writers#new"
+post "/register" => "writers#create"
 
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+get "/writers/:id" => "writers#show"
+get "/writers/:id/edit" => "writers#edit"
+patch "/writers/:id" => "writers#update"
+put "/writers/:id" => "writers#update"
+delete "/writers/:id" => "writers#destroy"
 
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
+get "/posts/new" => "posts#new"
+post "/posts" => "posts#create"
+post "/posts/:id/publish" => "posts#publish"
+get "/posts/:id/edit" => "posts#edit"
+patch "/posts/:id" => "posts#update"
+put "/posts/:id" => "posts#update"
+delete "/posts/:id" => "posts#destroy"
 
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
+get "/posts/:id/responses/new" => "posts/responses#new"
+post "/posts/:id/responses" => "posts/responses#create"
+get "/posts/:id/responses/:id/edit" => "posts/responses#edit"
+patch "/posts/:id/responses/:id" => "posts/responses#update"
+put "/posts/:id/responses/:id" => "posts/responses#update"
+delete "/posts/:id/responses/:id" => "posts/responses#destroy"
 
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
+get "/writers/:id/posts/:id/responses" => "posts/responses#index"
+post "/writers/:id/posts/:id/responses/:id" => "posts/responses#approve"
+# TODO - add ability to include only three approved responses with original post
 
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
 end
+
+# articles GET    /articles(.:format)          articles#index
+#              POST   /articles(.:format)          articles#create
+#  new_article GET    /articles/new(.:format)      articles#new
+# edit_article GET    /articles/:id/edit(.:format) articles#edit
+#      article GET    /articles/:id(.:format)      articles#show
+#              PATCH  /articles/:id(.:format)      articles#update
+#              PUT    /articles/:id(.:format)      articles#update
+#              DELETE /articles/:id(.:format)      articles#destroy
+#         root GET    /                            welcome#index
