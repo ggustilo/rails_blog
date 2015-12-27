@@ -7,6 +7,27 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<header>
+		<div class="">
+		<h1>PeanutGallery</h1>
+		<h4>
+		</div>
+		<%if current_user%>
+    <h1 class="">Hello, <%=current_user.username%></h1>
+    <nav class="">
+        <button><a class="" href="/">Home</a></button>
+        <button><a class="" href="">View Active Posts</a></button>
+        <form class="" id="#logout" action="/logout" method="post">
+          <button><input class="" type="submit" value="Logout"></button>
+        </form>
+    </nav>
+  <%else%>
+     <nav class="">
+        <button><a class="" href="/register">Register</a></button>
+        <button><a class="" href="/login_form">Login</a></button>
+    </nav>
+  <%end%>
+	</header>
 
 <%= yield %>
 

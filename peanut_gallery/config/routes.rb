@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-# get "/posts/:id" => "posts#show"
+  # homepage
 
   get "/" => "posts#index"
+
+  # login and writers routes
 
   get "/login" => "writers#login_form"
   post "/login" => "writers#login"
@@ -16,6 +18,8 @@ Rails.application.routes.draw do
   put "/writers/:id" => "writers#update"
   delete "/writers/:id" => "writers#destroy"
 
+  # posts routes
+
   get "/posts/new" => "posts#new"
   post "/posts" => "posts#create"
   get "/posts/:id" => "posts#show"
@@ -24,6 +28,21 @@ Rails.application.routes.draw do
   patch "/posts/:id" => "posts#update"
   put "/posts/:id" => "posts#update"
   delete "/posts/:id" => "posts#destroy"
+
+  # posts by type
+
+  get "/posts/economics_posts" => "posts#economics_posts"
+  get "/posts/environment_posts" => "posts#environment_posts"
+  get "/posts/politics_posts" => "posts#politics_posts"
+  get "/posts/social_values_posts" => "posts#social_values_posts"
+  get "/posts/education_posts" => "posts#education_posts"
+  get "/posts/religion_posts" => "posts#religion_posts"
+  get "/posts/health_posts" => "posts#health_posts"
+  get "/posts/foreign_policy_posts" => "posts#foreign_policy_posts"
+  get "/posts/military_posts" => "posts#military_posts"
+  get "/posts/science_technology_posts" => "posts#science_technology_posts"
+
+  # responses routes
 
   get "/posts/:id/responses/new" => "responses#new"
   post "/posts/:id/responses" => "responses#create"
@@ -34,16 +53,5 @@ Rails.application.routes.draw do
 
   get "/writers/:id/posts/:id/responses" => "responses#index"
   post "/writers/:id/posts/:id/responses/:id" => "responses#approve"
-  # TODO - add ability to include only three approved responses with original post
 
 end
-
-# articles GET    /articles(.:format)          articles#index
-#              POST   /articles(.:format)          articles#create
-#  new_article GET    /articles/new(.:format)      articles#new
-# edit_article GET    /articles/:id/edit(.:format) articles#edit
-#      article GET    /articles/:id(.:format)      articles#show
-#              PATCH  /articles/:id(.:format)      articles#update
-#              PUT    /articles/:id(.:format)      articles#update
-#              DELETE /articles/:id(.:format)      articles#destroy
-#         root GET    /                            welcome#index
