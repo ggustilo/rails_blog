@@ -42,12 +42,11 @@ class WritersController < ApplicationController
 
 	def create
 		@writer = Writer.new(writer_params)
-		print writer_params
 		if @writer.save
 			session[:id] = @writer.id if !current_user
 			redirect_to "/writers/#{@writer.id}"
 		else 
-			@errors = ["Something could not save properly.  Please try again."]
+			@errors = ["Something could not save properly.  The username or email you entered may already be taken. Please try again."]
 			render "errors"
 		end
 	end

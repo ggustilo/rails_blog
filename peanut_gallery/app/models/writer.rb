@@ -7,7 +7,11 @@ class Writer < ActiveRecord::Base
   has_many :post_responses, through: :posts, source: :responses
   has_many :responders, through: :post_responses, source: :writer
 
-	def password
+	validates :username, uniqueness: true
+  validates :email, uniqueness: true
+  validates :password, presence: true
+
+  def password
     @password ||= Password.new(password_hash)
   end
 

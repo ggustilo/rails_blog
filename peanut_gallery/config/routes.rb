@@ -46,14 +46,15 @@ Rails.application.routes.draw do
 
   # responses routes
 
-  get "/posts/:id/responses/new" => "responses#new"
-  post "/posts/:id/responses" => "responses#create"
-  get "/posts/:id/responses/:id/edit" => "responses#edit"
-  patch "/posts/:id/responses/:id" => "responses#update"
-  put "/posts/:id/responses/:id" => "responses#update"
-  delete "/posts/:id/responses/:id" => "responses#destroy"
+  get "/posts/:post_id/responses/new" => "responses#new"
+  post "/posts/:post_id/responses" => "responses#create"
+  get "/posts/:post_id/responses/:id" => "responses#show"
+  get "/posts/:post_id/responses/:id/edit" => "responses#edit"
+  patch "/posts/:post_id/responses/:id" => "responses#update"
+  put "/posts/:post_id/responses/:id" => "responses#update"
+  delete "/posts/:post_id/responses/:id" => "responses#destroy"
 
-  get "/writers/:id/posts/:id/responses" => "responses#index"
-  post "/writers/:id/posts/:id/responses/:id" => "responses#approve"
+  get "/writers/:writer_id/posts/:post_id/responses" => "responses#index"
+  post "/writers/:writer_id/posts/:post_id/responses/:id" => "responses#approve"
 
 end

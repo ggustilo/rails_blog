@@ -1,1 +1,18 @@
-this is the new post form
+<%= form_for @post, url: {action: "create"}, html: {class: ""} do |f| %>
+  <%= f.label :title %>:
+  <%= f.text_field :title %><br />
+
+  <%= f.label :content %>:
+  <%= f.text_area :content, size: "60x12" %><br />
+
+   <%= f.label :category %>:
+  <%= f.text_field :category %><br />
+
+  <%= f.label :"response requests"%>:
+  <%= f.text_field :requests_for_responses %><br />
+
+   <%= f.label :"additional resources" %>:
+  <%= f.text_field :additional_resources %><br />
+
+  <%= f.submit "Create Post"%>
+<% end %>

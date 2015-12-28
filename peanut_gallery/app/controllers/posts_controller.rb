@@ -9,12 +9,22 @@ class PostsController < ApplicationController
 	end
 
 	def new
+		@post = Post.new
 	end
 
 	def create
+		@post = Post.new(post_params)
+		@post.writer = current_user
+		if @post.save
+			redirect_to "/writers/#{current_user.id}"
+		else 
+			@errors = ["Something could not save properly. Please try again."]
+			render "errors"
+		end
 	end
 
 	def show
+		@post = Post.find(params[:id])
 	end
 
 	def publish
@@ -27,6 +37,9 @@ class PostsController < ApplicationController
 	end
 
 	def destroy
+		@post = Post.find(params[:id])
+		Post.delete(@post)
+		redirect_to '/'
 	end
 
 	# types of posts controller
@@ -79,5 +92,11 @@ class PostsController < ApplicationController
 	def science_technology_posts
 		@posts = Post.where(category: 10)
 		render "posts/types/_posts_by_type"
+	end
+
+	private
+
+	def post_params
+	  params.require(:post).permit(:title, :content, :category, :requests_for_responses, :additional_resources, :writer)
 	end
 end

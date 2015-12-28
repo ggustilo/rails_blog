@@ -1,7 +1,7 @@
 <% if !@posts.empty? %>
 	<% @posts.each do |post| %>
 		<div class="post">
-			<h2 class="post-title"><%= post.title %></h2>
+				<h2 class="post-title"><a href="/posts/<%=post.id%>"><%= post.title %></a></h2>
 				<p class="post-body"><%= post.content %></p>
 				<p class="post-request-for-responses"><%= post.requests_for_responses %></p>
 				<p class="post-additional-resources"><%= post.additional_resources %></p>

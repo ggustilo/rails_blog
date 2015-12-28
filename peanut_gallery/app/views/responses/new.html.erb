@@ -1,1 +1,9 @@
-this is the form for a new response
+<%= form_for @response, url: {action: "create"}, html: {class: ""} do |f| %>
+  <%= f.label :title %>:
+  <%= f.text_field :title %><br />
+
+  <%= f.label :content %>:
+  <%= f.text_area :content, size: "60x12" %><br />
+
+  <%= f.submit "Create Response"%>
+<% end %>

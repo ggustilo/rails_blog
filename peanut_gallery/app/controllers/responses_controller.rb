@@ -1,9 +1,19 @@
 class ResponsesController < ApplicationController
 
 	def new
+		@response = Response.new
 	end
 
 	def create
+		@response = Response.new(response_params)
+		@response.writer = current_user
+		@response.post = Post.find(params[:post_id])
+		if @response.save
+			redirect_to "/writers/#{current_user.id}"
+		else 
+			@errors = ["Something could not save properly. Please try again."]
+			render "errors"
+		end
 	end
 
 	def index
@@ -11,6 +21,10 @@ class ResponsesController < ApplicationController
 	end
 
 	def approve
+	end
+
+	def show
+		@response = Response.find(params[:id])
 	end
 
 	def edit
@@ -22,5 +36,9 @@ class ResponsesController < ApplicationController
 	def destroy
 	end
 
+	private
 
+	def response_params
+	  params.require(:response).permit(:title, :content, :writer, :post)
+	end
 end
