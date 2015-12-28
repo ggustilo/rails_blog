@@ -6,7 +6,7 @@
 				<p class="post-request-for-responses"><%= post.requests_for_responses %></p>
 				<p class="post-additional-resources"><%= post.additional_resources %></p>
 			<div class="post-engagement-links">
-				<% if !(current_user  == post.writer) %>
+				<% if current_user %>
 					<!-- link_to "Write Response", "/posts/:id/responses/new" -->
 					<a href="/posts/<%=post.id%>/responses/new">Write Response</a>
 				<% elsif current_user == post.writer %>
@@ -16,5 +16,6 @@
 		</div>	
 	<% end %>
 <% else %>
-	<p>There are currently no active posts for this topic.</p>
+	<p>There are currently no published posts for this topic.</p>
 <%end%>
+

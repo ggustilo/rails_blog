@@ -13,20 +13,22 @@
 		<h4>
 		</div>
 		<%if current_user%>
-    <h1 class="">Hello, <%=current_user.username%></h1>
-    <nav class="">
-        <button><a class="" href="/">Home</a></button>
-        <button><a class="" href="">View Active Posts</a></button>
-        <form class="" id="#logout" action="/logout" method="post">
-          <button><input class="" type="submit" value="Logout"></button>
-        </form>
-    </nav>
-  <%else%>
-     <nav class="">
-        <button><a class="" href="/register">Register</a></button>
-        <button><a class="" href="/login_form">Login</a></button>
-    </nav>
-  <%end%>
+      <h1 class="">Hello, <%=current_user.username%></h1>
+      <nav class="">
+          <button><a href="/">Home</a></button>
+          <button><a href="/posts/active_posts">View Active Posts</a></button>
+          <form class="" id="" action="/logout" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <button><input class="" type="submit" value="Logout"></button>
+          </form>
+      </nav>
+    <%else%>
+       <nav class="">
+          <button><a href="/">Home</a></button>
+          <button><a class="" href="/register">Register</a></button>
+          <button><a class="" href="/login">Login</a></button>
+      </nav>
+    <%end%>
 	</header>
 
 <%= yield %>

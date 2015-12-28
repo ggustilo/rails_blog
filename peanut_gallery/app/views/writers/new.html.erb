@@ -1,1 +1,10 @@
-this is the form for a new writer
+<%= form_for @writer, url: {action: "create"}, html: {class: ""} do |f| %>
+	<%= f.label :username %>:
+  <%= f.text_field :username %>
+  <%= f.label :email %>:
+  <%= f.text_field :email %>
+  <%= f.label :password %>:
+  <%= f.password_field :password %>
+  <%= f.text_area :self_description, size: "60x12" %>
+  <%= f.submit "Submit" %>
+<% end %>

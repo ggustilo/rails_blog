@@ -18,6 +18,20 @@ Rails.application.routes.draw do
   put "/writers/:id" => "writers#update"
   delete "/writers/:id" => "writers#destroy"
 
+  # posts by type
+
+  get "/posts/active_posts" => "posts#active_posts"
+  get "/posts/economics_posts" => "posts#economics_posts"
+  get "/posts/environment_posts" => "posts#environment_posts"
+  get "/posts/politics_posts" => "posts#politics_posts"
+  get "/posts/social_values_posts" => "posts#social_values_posts"
+  get "/posts/education_posts" => "posts#education_posts"
+  get "/posts/religion_posts" => "posts#religion_posts"
+  get "/posts/health_posts" => "posts#health_posts"
+  get "/posts/foreign_policy_posts" => "posts#foreign_policy_posts"
+  get "/posts/military_posts" => "posts#military_posts"
+  get "/posts/science_technology_posts" => "posts#science_technology_posts"
+
   # posts routes
 
   get "/posts/new" => "posts#new"
@@ -29,18 +43,6 @@ Rails.application.routes.draw do
   put "/posts/:id" => "posts#update"
   delete "/posts/:id" => "posts#destroy"
 
-  # posts by type
-
-  get "/posts/economics_posts" => "posts#economics_posts"
-  get "/posts/environment_posts" => "posts#environment_posts"
-  get "/posts/politics_posts" => "posts#politics_posts"
-  get "/posts/social_values_posts" => "posts#social_values_posts"
-  get "/posts/education_posts" => "posts#education_posts"
-  get "/posts/religion_posts" => "posts#religion_posts"
-  get "/posts/health_posts" => "posts#health_posts"
-  get "/posts/foreign_policy_posts" => "posts#foreign_policy_posts"
-  get "/posts/military_posts" => "posts#military_posts"
-  get "/posts/science_technology_posts" => "posts#science_technology_posts"
 
   # responses routes
 

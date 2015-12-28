@@ -22,4 +22,5 @@ class Writer < ActiveRecord::Base
   		return false
   	end
   end
+
 end

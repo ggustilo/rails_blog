@@ -4,6 +4,8 @@ class PostsController < ApplicationController
 	end
 
 	def active_posts
+		@posts = Post.all
+		render "posts/active_posts"
 	end
 
 	def new
@@ -27,35 +29,55 @@ class PostsController < ApplicationController
 	def destroy
 	end
 
-	# types of posts controller (extract?)
+	# types of posts controller
 
 	def economics_posts
+		@posts = Post.where(category: 1)
+		render "posts/types/_posts_by_type"
 	end
 
 	def environment_posts
+		@posts = Post.where(category: 2)
+		render "posts/types/_posts_by_type"
 	end
 
 	def politics_posts
+		@posts = Post.where(category: 3)
+		render "posts/types/_posts_by_type"
 	end
 
 	def social_values_posts
+		@posts = Post.where(category: 4)
+		render "posts/types/_posts_by_type"
 	end
 
 	def education_posts
+		@posts = Post.where(category: 5)
+		render "posts/types/_posts_by_type"
 	end
 
 	def religion_posts
+		@posts = Post.where(category: 6)
+		render "posts/types/_posts_by_type"
 	end
 
 	def health_posts
+		@posts = Post.where(category: 7)
+		render "posts/types/_posts_by_type"
 	end
 
 	def foreign_policy_posts
+		@posts = Post.where(category: 8)
+		render "posts/types/_posts_by_type"
 	end
 
 	def military_posts
+		@posts = Post.where(category: 9)
+		render "posts/types/_posts_by_type"
 	end
 
 	def science_technology_posts
+		@posts = Post.where(category: 10)
+		render "posts/types/_posts_by_type"
 	end
 end
