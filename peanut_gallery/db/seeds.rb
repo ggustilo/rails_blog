@@ -6,7 +6,7 @@ anais = Writer.create(username: "anais", email: "nin@gmail.com", password: "sex"
 # Posts
 
 novel = Post.create(title: "A Farewell to Arms", category: 9, writer: hemingway)
-erotica = Post.create(title: "A Stranger in the House of Love", category: 7, writer: anais)
+erotica = Post.create(title: "A Spy in the House of Love", category: 7, writer: anais)
 
 # Responses
 

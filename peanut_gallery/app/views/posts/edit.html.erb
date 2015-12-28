@@ -1,1 +1,18 @@
-this is the form to edit a post
+<%= form_for @post, url: {action: "update"}, html: {class: ""} do |f| %>
+  <%= f.label :title %>:
+  <%= f.text_field :title , :value => @post.title %><br />
+
+  <%= f.label :content %>:
+  <%= f.text_area :content, size: "60x12", :value => @post.content  %><br />
+
+   <%= f.label :category %>:
+  <%= f.text_field :category, :value => @post.category %><br />
+
+  <%= f.label :"response requests"%>:
+  <%= f.text_field :requests_for_responses, :value => @post.requests_for_responses  %><br />
+
+   <%= f.label :"additional resources" %>:
+  <%= f.text_field :additional_resources, :value => @post.additional_resources %><br />
+
+  <%= f.submit "Update Post"%>
+<% end %>

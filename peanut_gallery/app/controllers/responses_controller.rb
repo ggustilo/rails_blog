@@ -28,12 +28,19 @@ class ResponsesController < ApplicationController
 	end
 
 	def edit
+		@response = Response.find(params[:id])
 	end
 
 	def update
+		@response = Response.find(params[:id])
+		@response.update_attributes(response_params)
+		redirect_to "/posts/#{@response.post.id}"
 	end
 
 	def destroy
+		@response = Response.find(params[:id])
+		Response.delete(@response)
+		redirect_to '/'
 	end
 
 	private

@@ -1,1 +1,9 @@
-this is the form to edit a response
+<%= form_for @response, url: {action: "update"}, html: {class: ""} do |f| %>
+  <%= f.label :title %>:
+  <%= f.text_field :title, :value => @response.title %><br />
+
+  <%= f.label :content %>:
+  <%= f.text_area :content, size: "60x12", :value => @response.content  %><br />
+
+  <%= f.submit "Update Response"%>
+<% end %>
