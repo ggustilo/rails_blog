@@ -1,29 +1,20 @@
 
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Peanut Gallery seeks to continue the public policy debate as so exemplified in the Becker/Posner blog, started in 2004, and the Buckley/Vidal debates from 1968, supporting well-informed courteous discourse, as is so rarely found in this day and age.
 
-Things you may want to cover:
+Big ideas, lots of citations, clear concise prose.
 
-* Ruby version
+As a reader of Peanut Gallery, you can explore posts listed under the given topics. Each post will consist of an original overview of a given issue, well cited and written according to the author's own beliefs and opinions. Each post will also include approved responses to the overview, which may challenge or elucidate particular points within the original post.
 
-* System dependencies
+As a writer for Peanut Gallery, you may create a profile, listing your own credentials and background (there are no requirements to become a Peanut Gallery writer, although we do expect correct grammar and thorough citations for every piece of prose). You may then post original overview pieces for issues you care about, given that all facts are cited. You may also respond to available posts from other authors. Every Peanut Gallery author has authority to approve the responses to their own pieces. However, in the spirit of the site, we encourage authors to approve responses that challenge their own positions (and perhaps to update their original composition to reflect any change in views, or acknowledgement of additional complexity). Once you have a minimum of one approved response, you may publish your post for unregistered readers to view.
 
-* Configuration
+Improper or incomplete citations, discourteous language and/or discriminatory attacks on other writers may cause writing privileges to be revoked. Site administrators reserve the final judgement on any suspect writing or behavior, and may issue warnings, or take disciplinary action at will.
 
-* Database creation
+TODO:
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+1. Clean up CSS
+2. Figure out why the damn response object keeps showing up
+3. Add approval and publishing functionality
+4. Fix category naming (not numbers, but the actual category - inheritance)
+5. Test test test
