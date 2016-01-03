@@ -24,7 +24,7 @@ class ResponsesController < ApplicationController
 		@response = Response.find(params[:id])
 		if @response.approved == false
 			@response.update_attributes(approved: true)
-		elsif @response.published == true
+		elsif @response.approved == true
 			@response.update_attributes(approved: false)
 		else
 			@errors = ["Your response was already approved."]
