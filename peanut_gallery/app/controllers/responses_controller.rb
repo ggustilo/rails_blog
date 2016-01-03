@@ -21,6 +21,16 @@ class ResponsesController < ApplicationController
 	end
 
 	def approve
+		@response = Response.find(params[:id])
+		if @response.approved == false
+			@response.update_attributes(approved: true)
+		elsif @response.published == true
+			@response.update_attributes(approved: false)
+		else
+			@errors = ["Your response was already approved."]
+			render "errors"
+		end
+		redirect_to '/'
 	end
 
 	def show

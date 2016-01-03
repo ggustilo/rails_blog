@@ -28,6 +28,16 @@ class PostsController < ApplicationController
 	end
 
 	def publish
+		@post = Post.find(params[:id])
+		if @post.published == false
+			@post.update_attributes(published: true)
+		elsif @post.published == true
+			@post.update_attributes(published: false)
+		else
+			@errors = ["Your post was already published."]
+			render "errors"
+		end
+		redirect_to '/'
 	end
 
 	def edit
@@ -49,52 +59,52 @@ class PostsController < ApplicationController
 	# types of posts controller
 
 	def economics_posts
-		@posts = Post.where(category: 1)
+		@posts = Post.where(category: 1, published: true)
 		render "posts/types/_posts_by_type"
 	end
 
 	def environment_posts
-		@posts = Post.where(category: 2)
+		@posts = Post.where(category: 2, published: true)
 		render "posts/types/_posts_by_type"
 	end
 
 	def politics_posts
-		@posts = Post.where(category: 3)
+		@posts = Post.where(category: 3, published: true)
 		render "posts/types/_posts_by_type"
 	end
 
 	def social_values_posts
-		@posts = Post.where(category: 4)
+		@posts = Post.where(category: 4, published: true)
 		render "posts/types/_posts_by_type"
 	end
 
 	def education_posts
-		@posts = Post.where(category: 5)
+		@posts = Post.where(category: 5, published: true)
 		render "posts/types/_posts_by_type"
 	end
 
 	def religion_posts
-		@posts = Post.where(category: 6)
+		@posts = Post.where(category: 6, published: true)
 		render "posts/types/_posts_by_type"
 	end
 
 	def health_posts
-		@posts = Post.where(category: 7)
+		@posts = Post.where(category: 7, published: true)
 		render "posts/types/_posts_by_type"
 	end
 
 	def foreign_policy_posts
-		@posts = Post.where(category: 8)
+		@posts = Post.where(category: 8, published: true)
 		render "posts/types/_posts_by_type"
 	end
 
 	def military_posts
-		@posts = Post.where(category: 9)
+		@posts = Post.where(category: 9, published: true)
 		render "posts/types/_posts_by_type"
 	end
 
 	def science_technology_posts
-		@posts = Post.where(category: 10)
+		@posts = Post.where(category: 10, published: true)
 		render "posts/types/_posts_by_type"
 	end
 

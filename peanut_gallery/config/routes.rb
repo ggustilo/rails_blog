@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   get "/posts/new" => "posts#new"
   post "/posts" => "posts#create"
   get "/posts/:id" => "posts#show"
-  post "/posts/:id/publish" => "posts#publish"
+  post "/posts/:id/publish" => "posts#publish", as: "posts_published"
   get "/posts/:id/edit" => "posts#edit"
   patch "/posts/:id" => "posts#update"
   put "/posts/:id" => "posts#update"
@@ -56,7 +56,7 @@ Rails.application.routes.draw do
   put "/posts/:post_id/responses/:id" => "responses#update"
   delete "/posts/:post_id/responses/:id" => "responses#destroy"
 
-  get "/writers/:writer_id/posts/:post_id/responses" => "responses#index"
-  post "/writers/:writer_id/posts/:post_id/responses/:id" => "responses#approve"
+  get "/posts/:post_id/responses" => "responses#index"
+  post "/posts/:post_id/responses/:id" => "responses#approve", as: "posts_responses_approve"
 
 end
