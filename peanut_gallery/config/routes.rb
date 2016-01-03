@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+  
   # homepage
 
   get "/" => "posts#index"
