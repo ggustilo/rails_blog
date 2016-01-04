@@ -49,7 +49,6 @@ Rails.application.routes.draw do
   post "/posts/:id/downvote" => "posts#downvote", as: "posts_downvote"
   post "/posts/:id/flag" => "posts#flag", as: "posts_flag"
 
-
   # responses routes
 
   get "/posts/:post_id/responses/new" => "responses#new"

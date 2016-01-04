@@ -19,7 +19,7 @@
 					<% if current_user && current_user != post.writer %>
 						<!-- link_to "Write Response", "/posts/:id/responses/new" -->
 						<a href="/responses/new">Write Response</a>
-					<% elsif current_user == post.writer %>
+					<% elsif current_user == post.writer && post.published == false %>
 						<a href="/posts/<%post.id%>/edit">Edit Post</a>
 					<% end %>
 				</div>
