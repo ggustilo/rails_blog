@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   post "/register" => "writers#create"
 
   get "/writers/:id" => "writers#show"
+  get "/writers/:id/public" => "writers#public_show"
   get "/writers/:id/edit" => "writers#edit"
   patch "/writers/:id" => "writers#update"
   put "/writers/:id" => "writers#update"
@@ -46,6 +47,7 @@ Rails.application.routes.draw do
   delete "/posts/:id" => "posts#destroy"
   post "/posts/:id/upvote" => "posts#upvote", as: "posts_upvote"
   post "/posts/:id/downvote" => "posts#downvote", as: "posts_downvote"
+  post "/posts/:id/flag" => "posts#flag", as: "posts_flag"
 
 
   # responses routes
@@ -62,5 +64,6 @@ Rails.application.routes.draw do
   post "/posts/:post_id/responses/:id" => "responses#approve", as: "posts_responses_approve"
   post "/posts/:post_id/responses/:id/upvote" => "responses#upvote", as: "posts_responses_upvote"
   post "/posts/:post_id/responses/:id/downvote" => "responses#downvote", as: "posts_responses_downvote"
+  post "/posts/:post_id/responses/:id/flag" => "responses#flag", as: "posts_responses_flag"
 
 end

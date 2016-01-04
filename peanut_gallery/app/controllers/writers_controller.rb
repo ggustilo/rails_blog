@@ -52,9 +52,20 @@ class WritersController < ApplicationController
 	end
 
 	def show
-		@writer = current_user
-		@posts = @writer.posts
-		@responses = @writer.responses
+		if current_user
+			@writer = current_user
+			@posts = @writer.posts
+			@responses = @writer.responses
+			render @user
+		else
+			redirect_to login_path
+		end
+	end
+
+	def public_show
+		@writer = Writer.find(params[:id])
+		@posts = @writer.posts.where(published: true)
+		@responses = @writer.responses.where(approved: true)
 	end
 
 	def edit

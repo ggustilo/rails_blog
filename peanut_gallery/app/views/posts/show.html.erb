@@ -1,5 +1,6 @@
 <div class="post">
-	<h5><%= @post.title %></h5>
+	<h5><a href="/posts/<%=@post.id%>"><%= @post.title %></a></h5>
+	<p class="post_writer">by <%= @post.writer.username %></p>
 	<p><%= @post.content %></p>
 	<p><%= @post.requests_for_responses %></p>
 	<p><%= @post.additional_resources %></p>
@@ -7,6 +8,11 @@
 		<%= button_to "Upvote", posts_upvote_path(@post) %>
 		<%= button_to "Downvote", posts_downvote_path(@post) %>
 	</div>
+
+	<div class="post_flag">
+		<%= button_to "Flag", posts_flag_path(@post) %>
+	</div>
+
 	<div class="post_responses">
 		<ul>
 			<% @responses.each do |response| %>

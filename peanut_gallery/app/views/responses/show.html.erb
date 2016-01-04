@@ -10,6 +10,10 @@
 		<%= button_to "Downvote", posts_responses_downvote_path(@response.post, @response) %>
 	</div>
 
+	<div class="response_flag">
+		<%= button_to "Flag", posts_responses_flag_path(@response.post, @response) %>
+	</div>
+
 	<div class="approve-buttons">
 		<% if !@response.approved && current_user == @response.post.writer %>
 			<%= button_to "Approve Response", posts_responses_approve_path(@response.post.id, @response.id) %>

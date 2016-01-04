@@ -2,14 +2,14 @@
 	<% @posts.each do |post| %>
 		<div class="post">
 			<h2 class="post-title"><a href="/posts/<%=post.id%>"><%= post.title %></a></h2>
-				<p class="post-body"><%= post.content %></p>
-				<p class="post-request-for-responses"><%= post.requests_for_responses %></p>
-				<p class="post-additional-resources"><%= post.additional_resources %></p>
+				<p class="post_writer">by <a href="/writers/<%=post.writer.id%>/public"><%= post.writer.username %></p>
 				<div class="post_votes">
 					<%= button_to "Upvote", { action: "upvote", id: post.id }, method: :post %>
 					<%= button_to "Downvote", { action: "downvote", id: post.id }, method: :post %>
 				</div>
-
+				<div class="post_flag">
+					<%= button_to "Flag", posts_flag_path(post) %>
+				</div>
 				<% if post.responses %>
 			  	<div class="post_responses">
 						<ul>

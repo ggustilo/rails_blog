@@ -13,12 +13,18 @@ class PostsController < ApplicationController
 	end
 
 	def new
-		@post = Post.new
+		if current_user
+			@post = Post.new
+		else
+			redirect_to login_path
+		end
 	end
 
 	def create
-		@post = Post.new(post_params)
-		@post.writer = current_user
+		if current_user
+			@post = Post.new(post_params)
+			@post.writer = current_user
+		end
 		if @post.save
 			redirect_to "/writers/#{current_user.id}"
 		else 
@@ -28,53 +34,84 @@ class PostsController < ApplicationController
 	end
 
 	def show
-		@post = Post.find(params[:id])
-		@responses = @post.responses
+		@post = Post.find_by(id: params[:id])
+		if @post
+			@responses = @post.responses
+		else
+			redirect_to login_path
+		end
 	end
 
 	def publish
-		@post = Post.find(params[:id])
-		if @post.published == false
+		@post = Post.find_by(id: params[:id])
+		if @post && @post.published == false
 			@post.update_attributes(published: true)
-		elsif @post.published == true
+		elsif @post && @post.published == true
 			@post.update_attributes(published: false)
 		else
 			@errors = ["Your post was already published."]
 			render "errors"
 		end
-		redirect_to '/'
+		if @post.save
+			redirect_to '/'
+		end
 	end
 
 	def upvote
-		@post = Post.find(params[:id])
+		@post = Post.find_by(id: params[:id])
 		@post.votes += 1
-		@post.save
-		redirect_to posts_show_path(@post)
+		if @post.save
+			redirect_to posts_show_path(@post)
+		else
+			@errors = ["I'm sorry, but something went wrong and you cannot upvote at this time.  Please try again later."]
+		end
 	end
 
 	def downvote
-		@post = Post.find(params[:id])
+		@post = Post.find_by(id: params[:id])
 		if @post.votes > 0
 			@post.votes -= 1
-			@post.save
 		end
-		redirect_to posts_show_path(@post)
+		if @post.save
+			redirect_to posts_show_path(@post)
+		else
+			@errors = ["I'm sorry, but something went wrong and you cannot upvote at this time.  Please try again later."]
+		end
+	end
+
+	def flag
+		@post = Post.find_by(id: params[:id])
+		if @post && @post.flagged == false
+			@post.update_attributes(flagged: true)
+		elsif @post && @post.flagged == true
+			@post.update_attributes(flagged: false)
+		else 
+			@error = ["There was an error with your flag."]
+		end
+		if @post.save
+			redirect_to posts_show_path(@post)
+		end
 	end
 
 	def edit
-		@post = Post.find(params[:id])
+		@post = Post.find_by(id: params[:id])
 	end
 
 	def update
-		@post = Post.find(params[:id])
+		@post = Post.find_by(id: params[:id])
 		@post.update_attributes(post_params)
-		redirect_to "/posts/#{@post.id}"
+		if @post.save
+			redirect_to "/posts/#{@post.id}"
+		end
 	end
 
 	def destroy
-		@post = Post.find(params[:id])
-		Post.delete(@post)
-		redirect_to '/'
+		@post = Post.find_by(id: params[:id])
+		if Post.delete(@post)
+			redirect_to '/'
+		else
+			@errors = ["You cannot delete this post at this time.  Please try again later."]
+		end
 	end
 
 	# types of posts controller

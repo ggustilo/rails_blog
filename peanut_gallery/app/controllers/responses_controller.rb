@@ -30,7 +30,9 @@ class ResponsesController < ApplicationController
 			@errors = ["Your response was already approved."]
 			render "errors"
 		end
-		redirect_to '/'
+		if @response.save
+			redirect_to '/'
+		end
 	end
 
 	def upvote
@@ -55,6 +57,20 @@ class ResponsesController < ApplicationController
 		end
 	end
 
+	def flag
+		@response = Response.find(params[:id])
+		if @response.flagged == false
+			@response.update_attributes(flagged: true)
+		elsif @response.flagged == true
+			@response.update_attributes(flagged: false)
+		else 
+			@error = ["There was an error with your flag."]
+		end
+		if @response.save
+			redirect_to responses_show_path(@response.post, @response)
+		end
+	end
+
 	def show
 		@response = Response.find(params[:id])
 	end
@@ -65,8 +81,9 @@ class ResponsesController < ApplicationController
 
 	def update
 		@response = Response.find(params[:id])
-		@response.update_attributes(response_params)
-		redirect_to "/posts/#{@response.post.id}"
+		if @response.update_attributes(response_params)
+			redirect_to "/posts/#{@response.post.id}"
+		end
 	end
 
 	def destroy
