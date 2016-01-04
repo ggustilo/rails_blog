@@ -1,13 +1,38 @@
 <div class="response">
+
 	<h6><%= @response.title %></h6>
 	<p><%= @response.content %></p>
 	<p class="response_author"><%=@response.writer.username %></p>
 	<p class="response_date"><%=@response.created_at %></p>
+	<% if @response.post %>
+		<p class="response_post">Written for Post: <a href="/posts/<%=@response.post.id%>"><%=@response.post.title %></a></p>
+	<% else %>
+		<p class="response_post">Written for Post Since Deleted</p>
+	<% end %>
+	
+	<span class="votes">
+		<div class="response_votes">
+			<%= button_to "Upvote", responses_upvote_path(@response) %>
+			<%= button_to "Downvote", responses_downvote_path(@response) %>
+		</div>
+		<p>Votes: <%= @response.votes %></p>
+	</span>
+	<div class="response_flag">
+		<%= button_to "Flag", responses_flag_path(@response) %>
+	</div>
+
+	<div class="approve-buttons">
+		<% if !@response.approved && @response.post && current_user == @response.post.writer %>
+			<%= button_to "Approve Response", responses_approve_path(@response.id) %>
+		<% elsif @response.approved && @response.post && current_user == @response.post.writer %>
+			<%= button_to "Unapprove Response", responses_approve_path(@response.id) %>
+		<% end %>
+	</div>
 
 	<% if current_user == @response.writer %>
 		<div class="edit_links">
-			<%= link_to "Edit Response", controller: "responses", action: "edit", id: @response%>
-			<%= button_to "Delete Response", { action: "destroy", id: @response.id },
+			<%= button_to "Edit Response", {controller: "responses", action: "edit", id: @response}, method: :get%>
+			<%= button_to "Delete Response", { action: "destroy", id: @response },
                                 method: :delete, data: { confirm: "Are you sure?" } %>
 		</div>
 	<%end%>

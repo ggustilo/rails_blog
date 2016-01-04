@@ -1,0 +1,26 @@
+<h2><%= @writer.username %> - public profile</h2>
+<div class="posts">
+	<h4>Posts <%= @writer.username %> has written:</h4>
+	<% @posts.each do |post| %>
+		<div class="post">
+			<span>
+				<h5><a href="/posts/<%=post.id%>"><%= post.title %></a></h5>
+				</p>
+			</span>
+		</div>
+	<%end%>
+</div>
+
+<div class="responses">
+	<h4>Responses <%= @writer.username %> has written:</h4>
+			<% @responses.each do |response| %>
+				<div class="response">
+					<span>
+						<h6><a href="/responses/<%=response.id%>"><%=response.title %></a></h6>
+						<p>Written for post: <a href="/posts/<%=response.post.id%>"><%= response.post.title %></a></p>
+						</p>
+					</span>
+				</div>
+			<% end %>
+		</div>
+</div>

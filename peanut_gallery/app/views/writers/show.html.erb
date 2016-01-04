@@ -4,17 +4,37 @@
 	<h4>Posts you have written:</h4>
 	<% @posts.each do |post| %>
 		<div class="post">
-			<h5><a href="/posts/<%=post.id%>"><%= post.title %></a></h5>
+			<span>
+				<h5><a href="/posts/<%=post.id%>"><%= post.title %></a></h5>
+				<p>Published: 
+					<% if post.published %>
+						✔
+					<% else %>
+						✘
+					<% end %>
+				</p>
+			</span>
 		</div>
 	<%end%>
 </div>
 
-<div class="responses">
-	<h4>Responses you have written:</h4>
-			<%=@responses.each do |response| %>
+<% if @responses %>
+	<div class="responses">
+		<h4>Responses you have written:</h4>
+			<% @responses.each do |response| %>
 				<div class="response">
-					<h6><a href="/posts/<%=response.post.id%>/responses/<%=response.id%>"><%=response.title %></a></h6>
+					<span>
+						<h6><a href="/responses/<%=response.id%>"><%=response.title%></a></h6>
+						<p>Approved: 
+							<% if response.approved %>
+								✔
+							<% else %>
+								✘
+							<% end %>
+						</p>
+					</span>
 				</div>
 			<% end %>
 		</div>
-</div>
+	</div>
+<% end %>

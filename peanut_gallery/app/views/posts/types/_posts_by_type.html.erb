@@ -2,20 +2,30 @@
 	<% @posts.each do |post| %>
 		<div class="post">
 			<h2 class="post-title"><a href="/posts/<%=post.id%>"><%= post.title %></a></h2>
-				<p class="post-body"><%= post.content %></p>
-				<p class="post-request-for-responses"><%= post.requests_for_responses %></p>
-				<p class="post-additional-resources"><%= post.additional_resources %></p>
-			<div class="post-engagement-links">
-				<% if current_user %>
-					<!-- link_to "Write Response", "/posts/:id/responses/new" -->
-					<a href="/posts/<%=post.id%>/responses/new">Write Response</a>
-				<% elsif current_user == post.writer %>
-					<a href="/posts/<%post.id%>/edit">Edit Post</a>
+				<p class="post_writer">by <a href="/writers/<%=post.writer.id%>/public"><%= post.writer.username %></p>
+				<% if post.responses %>
+			  	<div class="post_responses">
+						<ul>
+							<% post.responses.each do |response| %>
+								<% if response.approved || current_user == post.writer %>
+										<li><a href="/responses/<%=response.id%>"><%= response.title %></a></li>
+								<% end %>
+							<% end %>
+						</ul>
+					</div>
 				<% end %>
-			</div>
-		</div>	
-	<% end %>
+
+				<div class="post-engagement-links">
+					<% if current_user && current_user != post.writer %>
+						<!-- link_to "Write Response", "/posts/:id/responses/new" -->
+						<a href="/responses/new">Write Response</a>
+					<% elsif current_user == post.writer && post.published == false %>
+						<a href="/posts/<%post.id%>/edit">Edit Post</a>
+					<% end %>
+				</div>
+		</div>
+	<% end %>	
 <% else %>
 	<p>There are currently no published posts for this topic.</p>
-<%end%>
+<% end %>
 

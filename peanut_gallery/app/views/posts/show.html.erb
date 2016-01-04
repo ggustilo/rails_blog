@@ -1,26 +1,42 @@
 <div class="post">
-	<h5><%= @post.title %></h5>
-	<p>Category: <%= @post.category %></p>
+	<h5><%= @post.title %></a></h5>
+	<p class="post_writer">by <%= @post.writer.username %></p>
 	<p><%= @post.content %></p>
 	<p><%= @post.requests_for_responses %></p>
 	<p><%= @post.additional_resources %></p>
+	<span class="votes">
+		<div class="post_votes">
+			<%= button_to "Upvote", posts_upvote_path(@post) %>
+			<%= button_to "Downvote", posts_downvote_path(@post) %>
+		</div>
+		<p>Votes: <%= @post.votes %></p>
+	</span>
+	<div class="post_flag">
+		<%= button_to "Flag", posts_flag_path(@post) %>
+	</div>
 
 	<div class="post_responses">
-		<%=@post.responses.each do |response| %>
-			<div class="response">
-				<h6><a href="/posts/<%=@post.id%>/responses/<%=response.id%>"><%= response.title %></a></h6>
-				<p><%= response.content %></p>
-				<p class="response_author"><%=response.writer.username %></p>
-				<p class="response_date"><%=response.created_at %></p>
-			</div>
-		<% end %>
+		<ul>
+			<% @responses.each do |response| %>
+				<% if response.approved || current_user == @post.writer %>
+							<li><a href="/responses/<%=response.id%>"><%= response.title %></a></li>
+				<% end %>
+			<% end %>
+		</ul>
 	</div>
 
 	<% if current_user == @post.writer %>
 		<div class="edit_links">
-			<%= link_to "Edit Post", controller: "posts", action: "edit", id: @post %>
-			<%= button_to "Delete Post", { action: "destroy", id: @post.id },
+			<% if !@post.published %>
+				<%= link_to "Edit Post", controller: "posts", action: "edit", id: @post %>
+	      <%= button_to "Publish Post", { action: "publish", id: @post.id }, method: :post %>
+	      <%= button_to "Delete Post", { action: "destroy", id: @post.id },
                                 method: :delete, data: { confirm: "Are you sure?" } %>
+	    <% elsif @post.published %>
+	    	<%= button_to "Return to Draft", { action: "publish", id: @post.id }, method: :post %>
+	    	<%= button_to "Delete Post", { action: "destroy", id: @post.id },
+                                method: :delete, data: { confirm: "Are you sure?" } %>
+	    <% end %>
 		</div>
 	<%end%>
 

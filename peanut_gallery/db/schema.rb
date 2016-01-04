@@ -11,38 +11,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151226143249) do
+ActiveRecord::Schema.define(version: 20160104021728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "posts", force: :cascade do |t|
-    t.string   "title",                  null: false
+    t.string   "title",                                  null: false
     t.text     "content"
-    t.integer  "category",               null: false
+    t.integer  "category",                               null: false
     t.text     "requests_for_responses"
     t.text     "additional_resources"
-    t.integer  "writer_id",              null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "writer_id",                              null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.boolean  "published",              default: false
+    t.integer  "votes",                  default: 0
+    t.boolean  "flagged",                default: false
   end
 
   create_table "responses", force: :cascade do |t|
-    t.string   "title",      null: false
+    t.string   "title",                      null: false
     t.text     "content"
-    t.integer  "writer_id",  null: false
-    t.integer  "post_id",    null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "writer_id",                  null: false
+    t.integer  "post_id",                    null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "approved",   default: false
+    t.integer  "votes",      default: 0
+    t.boolean  "flagged",    default: false
   end
 
   create_table "writers", force: :cascade do |t|
-    t.string   "username",         null: false
-    t.string   "email",            null: false
-    t.string   "password_hash",    null: false
+    t.string   "username",                         null: false
+    t.string   "email",                            null: false
+    t.string   "password_hash",                    null: false
     t.text     "self_description"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.boolean  "flagged",          default: false
   end
 
 end
