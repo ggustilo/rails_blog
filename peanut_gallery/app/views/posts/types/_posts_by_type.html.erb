@@ -5,28 +5,31 @@
 				<p class="post-body"><%= post.content %></p>
 				<p class="post-request-for-responses"><%= post.requests_for_responses %></p>
 				<p class="post-additional-resources"><%= post.additional_resources %></p>
-				<div class="post_responses">
-					<% if post.responses %>
-					  <% post.responses.each do |response| %>
-							<% if response.approved || current_user == post.writer %>
-								<div class="response">
-									<h6><a href="/posts/<%=post.id%>/responses/<%=response.id%>"><%= response.title %></a></h6>
-									<p><%= response.content %></p>
-									<p class="response_author"><%=response.writer.username %></p>
-									<p class="response_date"><%=response.created_at %></p>
-								</div>
+				<div class="post_votes">
+					<%= button_to "Upvote", { action: "upvote", id: post.id }, method: :post %>
+					<%= button_to "Downvote", { action: "downvote", id: post.id }, method: :post %>
+				</div>
+
+				<% if post.responses %>
+			  	<div class="post_responses">
+						<ul>
+							<% post.responses.each do |response| %>
+								<% if response.approved || current_user == post.writer %>
+										<li><a href="/posts/<%=post.id%>/responses/<%=response.id%>"><%= response.title %></a></li>
+								<% end %>
 							<% end %>
-						<% end %>
-					<% end %>
-				</div>	
-			<div class="post-engagement-links">
-				<% if current_user && current_user != post.writer %>
-					<!-- link_to "Write Response", "/posts/:id/responses/new" -->
-					<a href="/posts/<%=post.id%>/responses/new">Write Response</a>
-				<% elsif current_user == post.writer %>
-					<a href="/posts/<%post.id%>/edit">Edit Post</a>
+						</ul>
+					</div>
 				<% end %>
-			</div>
+
+				<div class="post-engagement-links">
+					<% if current_user && current_user != post.writer %>
+						<!-- link_to "Write Response", "/posts/:id/responses/new" -->
+						<a href="/posts/<%=post.id%>/responses/new">Write Response</a>
+					<% elsif current_user == post.writer %>
+						<a href="/posts/<%post.id%>/edit">Edit Post</a>
+					<% end %>
+				</div>
 		</div>
 	<% end %>	
 <% else %>

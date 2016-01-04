@@ -38,19 +38,21 @@ Rails.application.routes.draw do
 
   get "/posts/new" => "posts#new"
   post "/posts" => "posts#create"
-  get "/posts/:id" => "posts#show"
+  get "/posts/:id" => "posts#show", as: "posts_show"
   post "/posts/:id/publish" => "posts#publish", as: "posts_published"
   get "/posts/:id/edit" => "posts#edit"
   patch "/posts/:id" => "posts#update"
   put "/posts/:id" => "posts#update"
   delete "/posts/:id" => "posts#destroy"
+  post "/posts/:id/upvote" => "posts#upvote", as: "posts_upvote"
+  post "/posts/:id/downvote" => "posts#downvote", as: "posts_downvote"
 
 
   # responses routes
 
   get "/posts/:post_id/responses/new" => "responses#new"
   post "/posts/:post_id/responses" => "responses#create"
-  get "/posts/:post_id/responses/:id" => "responses#show"
+  get "/posts/:post_id/responses/:id" => "responses#show", as: "responses_show"
   get "/posts/:post_id/responses/:id/edit" => "responses#edit"
   patch "/posts/:post_id/responses/:id" => "responses#update"
   put "/posts/:post_id/responses/:id" => "responses#update"
@@ -58,5 +60,7 @@ Rails.application.routes.draw do
 
   get "/posts/:post_id/responses" => "responses#index"
   post "/posts/:post_id/responses/:id" => "responses#approve", as: "posts_responses_approve"
+  post "/posts/:post_id/responses/:id/upvote" => "responses#upvote", as: "posts_responses_upvote"
+  post "/posts/:post_id/responses/:id/downvote" => "responses#downvote", as: "posts_responses_downvote"
 
 end

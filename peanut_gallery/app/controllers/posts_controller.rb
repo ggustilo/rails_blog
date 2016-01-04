@@ -4,8 +4,12 @@ class PostsController < ApplicationController
 	end
 
 	def active_posts
-		@posts = Post.all
-		render "posts/active_posts"
+		if current_user
+			@posts = Post.where(published: false)
+			render "posts/active_posts"
+		else
+			redirect_to login_path
+		end
 	end
 
 	def new
@@ -25,6 +29,7 @@ class PostsController < ApplicationController
 
 	def show
 		@post = Post.find(params[:id])
+		@responses = @post.responses
 	end
 
 	def publish
@@ -38,6 +43,22 @@ class PostsController < ApplicationController
 			render "errors"
 		end
 		redirect_to '/'
+	end
+
+	def upvote
+		@post = Post.find(params[:id])
+		@post.votes += 1
+		@post.save
+		redirect_to posts_show_path(@post)
+	end
+
+	def downvote
+		@post = Post.find(params[:id])
+		if @post.votes > 0
+			@post.votes -= 1
+			@post.save
+		end
+		redirect_to posts_show_path(@post)
 	end
 
 	def edit

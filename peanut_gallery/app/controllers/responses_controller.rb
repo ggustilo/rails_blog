@@ -33,6 +33,28 @@ class ResponsesController < ApplicationController
 		redirect_to '/'
 	end
 
+	def upvote
+		@response = Response.find(params[:id])
+		@response.votes += 1
+		if @response.save
+			redirect_to responses_show_path(@response.post, @response)
+		else
+			@error = ["There was an error with your vote."]
+		end
+	end
+
+	def downvote
+		@response = Response.find(params[:id])
+		if @response.votes > 0
+			@response.votes -= 1
+		end
+		if @response.save
+			redirect_to responses_show_path(@response.post, @response)
+		else 
+			@error = ["There was an error with your vote."]
+		end
+	end
+
 	def show
 		@response = Response.find(params[:id])
 	end
