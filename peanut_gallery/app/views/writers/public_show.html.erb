@@ -16,7 +16,7 @@
 			<% @responses.each do |response| %>
 				<div class="response">
 					<span>
-						<h6><a href="/posts/<%=response.post.id%>/responses/<%=response.id%>"><%=response.title %></a></h6>
+						<h6><a href="/responses/<%=response.id%>"><%=response.title %></a></h6>
 						<p>Written for post: <a href="/posts/<%=response.post.id%>"><%= response.post.title %></a></p>
 						</p>
 					</span>

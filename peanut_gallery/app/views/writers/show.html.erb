@@ -18,12 +18,13 @@
 	<%end%>
 </div>
 
-<div class="responses">
-	<h4>Responses you have written:</h4>
-			<%=@responses.each do |response| %>
+<% if @responses %>
+	<div class="responses">
+		<h4>Responses you have written:</h4>
+			<% @responses.each do |response| %>
 				<div class="response">
 					<span>
-						<h6><a href="/posts/<%=response.post.id%>/responses/<%=response.id%>"><%=response.title %></a></h6>
+						<h6><a href="/responses/<%=response.id%>"><%=response.title%></a></h6>
 						<p>Approved: 
 							<% if response.approved %>
 								✔
@@ -35,4 +36,5 @@
 				</div>
 			<% end %>
 		</div>
-</div>
+	</div>
+<% end %>

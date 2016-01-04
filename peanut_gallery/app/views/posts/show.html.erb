@@ -1,14 +1,16 @@
 <div class="post">
-	<h5><a href="/posts/<%=@post.id%>"><%= @post.title %></a></h5>
+	<h5><%= @post.title %></a></h5>
 	<p class="post_writer">by <%= @post.writer.username %></p>
 	<p><%= @post.content %></p>
 	<p><%= @post.requests_for_responses %></p>
 	<p><%= @post.additional_resources %></p>
-	<div class="post_votes">
-		<%= button_to "Upvote", posts_upvote_path(@post) %>
-		<%= button_to "Downvote", posts_downvote_path(@post) %>
-	</div>
-
+	<span class="votes">
+		<div class="post_votes">
+			<%= button_to "Upvote", posts_upvote_path(@post) %>
+			<%= button_to "Downvote", posts_downvote_path(@post) %>
+		</div>
+		<p>Votes: <%= @post.votes %></p>
+	</span>
 	<div class="post_flag">
 		<%= button_to "Flag", posts_flag_path(@post) %>
 	</div>
@@ -17,7 +19,7 @@
 		<ul>
 			<% @responses.each do |response| %>
 				<% if response.approved || current_user == @post.writer %>
-							<li><a href="/posts/<%=@post.id%>/responses/<%=response.id%>"><%= response.title %></a></li>
+							<li><a href="/responses/<%=response.id%>"><%= response.title %></a></li>
 				<% end %>
 			<% end %>
 		</ul>

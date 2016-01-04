@@ -2,12 +2,14 @@ class ResponsesController < ApplicationController
 
 	def new
 		@response = Response.new
+		session[:post_id] = Post.find(params[:post_id]).id
 	end
 
 	def create
 		@response = Response.new(response_params)
 		@response.writer = current_user
-		@response.post = Post.find(params[:post_id])
+		@response.post = Post.find(session[:post_id])
+		session[:post_id] = nil
 		if @response.save
 			redirect_to "/writers/#{current_user.id}"
 		else 
@@ -39,7 +41,7 @@ class ResponsesController < ApplicationController
 		@response = Response.find(params[:id])
 		@response.votes += 1
 		if @response.save
-			redirect_to responses_show_path(@response.post, @response)
+			redirect_to responses_show_path(@response)
 		else
 			@error = ["There was an error with your vote."]
 		end
@@ -51,7 +53,7 @@ class ResponsesController < ApplicationController
 			@response.votes -= 1
 		end
 		if @response.save
-			redirect_to responses_show_path(@response.post, @response)
+			redirect_to responses_show_path(@response)
 		else 
 			@error = ["There was an error with your vote."]
 		end
@@ -67,7 +69,7 @@ class ResponsesController < ApplicationController
 			@error = ["There was an error with your flag."]
 		end
 		if @response.save
-			redirect_to responses_show_path(@response.post, @response)
+			redirect_to responses_show_path(@response)
 		end
 	end
 

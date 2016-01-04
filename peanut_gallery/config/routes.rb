@@ -53,17 +53,17 @@ Rails.application.routes.draw do
   # responses routes
 
   get "/posts/:post_id/responses/new" => "responses#new"
-  post "/posts/:post_id/responses" => "responses#create"
-  get "/posts/:post_id/responses/:id" => "responses#show", as: "responses_show"
-  get "/posts/:post_id/responses/:id/edit" => "responses#edit"
-  patch "/posts/:post_id/responses/:id" => "responses#update"
-  put "/posts/:post_id/responses/:id" => "responses#update"
-  delete "/posts/:post_id/responses/:id" => "responses#destroy"
+  post "/responses" => "responses#create"
+  get "/responses/:id" => "responses#show", as: "responses_show"
+  get "/responses/:id/edit" => "responses#edit"
+  patch "/responses/:id" => "responses#update"
+  put "/responses/:id" => "responses#update"
+  delete "/responses/:id" => "responses#destroy"
 
-  get "/posts/:post_id/responses" => "responses#index"
-  post "/posts/:post_id/responses/:id" => "responses#approve", as: "posts_responses_approve"
-  post "/posts/:post_id/responses/:id/upvote" => "responses#upvote", as: "posts_responses_upvote"
-  post "/posts/:post_id/responses/:id/downvote" => "responses#downvote", as: "posts_responses_downvote"
-  post "/posts/:post_id/responses/:id/flag" => "responses#flag", as: "posts_responses_flag"
+  get "/responses" => "responses#index"
+  post "/responses/:id" => "responses#approve", as: "responses_approve"
+  post "/responses/:id/upvote" => "responses#upvote", as: "responses_upvote"
+  post "/responses/:id/downvote" => "responses#downvote", as: "responses_downvote"
+  post "/responses/:id/flag" => "responses#flag", as: "responses_flag"
 
 end
